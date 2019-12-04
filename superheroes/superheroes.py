@@ -45,7 +45,25 @@ class Hero:
     def add_armor(self, armor):
         self.abilities.append(armor)
 
-    def defend
+    def defend(self, damage_amt=0):
+        total_block = 0
+        for armor in self.armors:
+            total_block += armor.block()
+        return total_block
+
+    def take_damage(self, damage):
+        defense = self.defend()
+        self.current_health -= damage - defense
+        return self.current_health
+
+    def is_alive(self):
+        if self.current_health > 0:
+            return True
+        else:
+            return False
+            
+
+
 
 
 
@@ -95,3 +113,15 @@ if __name__ == "__main__":
     # hero.add_ability(ability)
     # hero.add_ability(another_ability)
     # print(hero.attack())
+
+    # hero = Hero("Grace Hopper", 200)
+    # shield = Armor("Shield", 50)
+    # hero.add_armor(shield)
+    # hero.take_damage(50)
+    # print(hero.current_health)
+
+    hero = Hero("Grace Hopper", 200)
+    hero.take_damage(150)
+    print(hero.is_alive())
+    hero.take_damage(15000)
+    print(hero.is_alive())
