@@ -168,6 +168,16 @@ class Arena:
             new_hero.add_armor(self.create_armor())
         return new_hero
 
+    def build_team_one(self):
+        hero_amount_1 = input("How many heroes do you want in team1 (number):  ")
+        for i in range(0, int(hero_amount_1)):
+            self.team_one.add_hero(self.create_hero())
+
+    def build_team_two(self):
+        hero_amount_2 = input("How many heroes do you want in team2  (number):  ")
+        for i in range(0, int(hero_amount_2)):
+            self.team_two.add_hero(self.create_hero())
+
 
 
 
