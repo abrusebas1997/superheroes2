@@ -56,7 +56,7 @@ class Hero:
         return total_attack
 
     def add_armor(self, armor):
-        self.abilities.append(armor)
+        self.armors.append(armor)
 
     def defend(self, damage_amt=0):
         total_block = 0
@@ -109,7 +109,7 @@ class Team:
     def add_hero(self, hero):
         self.heroes.append(hero)
 
-    def attack(self, other_Team):
+    def attack(self, other_team):
         while len(self.heroes_alive()) > 0 and len(other_team.heroes_alive()) > 0:
             first_team = random.choice(self.heroes_alive())
             second_team = random.choice(other_team.heroes_alive())
@@ -150,7 +150,7 @@ class Arena:
     def create_armor(self):
         armor_name = input("Enter a Armor name: ")
         armor_block = input("Enter the Armor Power: ")
-        return Armor(armor_name, int(armor_block))]
+        return Armor(armor_name, int(armor_block))
 
     def create_hero(self):
         name_of_hero = input("Enter a Hero name: ")
@@ -178,27 +178,73 @@ class Arena:
         for i in range(0, int(hero_amount_2)):
             self.team_two.add_hero(self.create_hero())
 
+    def team_battle(self):
+        self.team_one.attack(self.team_two)
 
 
+    def team_deaths(self, team_alive):
+        team_deaths= 0
+        for hero in team_alive:
+            if hero.current_health == 0:
+                team_deaths += 1
+        if team_deaths == len(team_alive):
+            return True
+        else:
+            return False
+
+    def show_stats(self):
+        team_one = self.team_deaths(self.team_one.heroes)
+        team_two = self.team_deaths(self.team_two.heroes)
+
+        if team_one == False:
+            print(f"The winner is {self.team_one.name}")
+            print("The Survivors are: ")
+            for hero in self.team_one.heroes:
+                if hero.is_alive():
+                    print(hero.name)
+        elif team_two == False:
+            print(f"Victor is Team {self.team_two.name}")
+            print("The Survivors are: ")
+            for hero in self.team_two.heroes:
+                if hero.is_alive():
+                    print(hero.name)
+                else:
+                    print("None bro, all my friends are dead")
+        elif team_one == False and team_two == False:
+            print("DRAW!")
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        print(f'Team One KDR: {self.team_one.stats()}')
+        print(f'Team Two KDR: {self.team_two.stats()}')
 
 
 if __name__ == "__main__":
+    game_is_running = True
+
+    # Instantiate Game Arena
+    arena = Arena()
+
+    #Build Teams
+    arena.build_team_one()
+    arena.build_team_two()
+
+    while game_is_running:
+
+        arena.team_battle()
+        arena.show_stats()
+        play_again = input("Play Again? Y or N: ")
+
+        #Check for Player Input
+        if play_again.lower() == "n":
+            game_is_running = False
+
+        else:
+            #Revive heroes to play again
+            arena.team_one.revive_heroes()
+            arena.team_two.revive_heroes()
+
+
+
     # If you run this file from the terminal
     # this block is executed.
     # ability = Ability("Debugging Ability", 20)
@@ -246,7 +292,13 @@ if __name__ == "__main__":
     # hero2.add_ability(ability4)
     # hero1.fight(hero2)
 
-    hero = Hero("Wonder Woman")
-    weapon = Weapon("Lasso of Truth", 90)
-    hero.add_weapon(weapon)
-    print(hero.attack())
+    # hero = Hero("Wonder Woman")
+    # weapon = Weapon("Lasso of Truth", 90)
+    # hero.add_weapon(weapon)
+    # print(hero.attack())
+
+    # arena = Arena()
+    # arena.build_team_one()
+    # arena.build_team_two()
+    # arena.team_battle()
+    # arena.show_stats()
