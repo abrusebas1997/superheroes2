@@ -147,6 +147,11 @@ class Arena:
         weapon_power = input("Enter the Weapon Power: ")
         return Weapon(weapon_name, int(weapon_power))
 
+    def create_armor(self):
+        armor_name = input("Enter a Armor name: ")
+        armor_block = input("Enter the Armor Power: ")
+        return Armor(armor_name, int(armor_block))
+
 
 
 
