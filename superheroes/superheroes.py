@@ -19,6 +19,11 @@ class Armor:
         block = random.randint(0, self.max_block)
         return block
 
+class Weapon(Ability):
+    def attack(self):
+        weapon_attack = randint(self.attack_strength//2, self.attack_strength)
+        return weapon_attack
+
 class Hero:
     def __init__(self, name, starting_health=100):
         self.abilities = []
@@ -29,9 +34,6 @@ class Hero:
 
     def add_ability(self, ability):
         self.abilities.append(ability)
-
-    def add_weapon(self, weapon):
-        self.abilities.append(weapon)
 
     def current_health(self):
         return self.current_health
@@ -61,7 +63,27 @@ class Hero:
             return True
         else:
             return False
-            
+
+    def fight(self, opponent):
+        while self.is_alive() == True and opponent.is_alive() == True:
+            if len(self.abilities) > 0 or len(opponent.abilities) > 0:
+                opponent.take_damage(self.attack())
+                self.take_damage(opponent.attack())
+                if opponent.is_alive() == False:
+                    self.add_kills(1)
+                    opponent.add_deaths(1)
+                    print(self.name + ' won')
+                else:
+                    self.add_deaths(1)
+                    self.add_kills(1)
+                    print(opponent.name + ' won')
+            else:
+                print("Draw!")
+                return False
+
+
+
+
 
 
 
@@ -120,8 +142,19 @@ if __name__ == "__main__":
     # hero.take_damage(50)
     # print(hero.current_health)
 
-    hero = Hero("Grace Hopper", 200)
-    hero.take_damage(150)
-    print(hero.is_alive())
-    hero.take_damage(15000)
-    print(hero.is_alive())
+
+    # hero.take_damage(15000)
+    # print(hero.is_alive())
+
+
+    hero1 = Hero("Wonder Woman")
+    hero2 = Hero("Dumbledore")
+    ability1 = Ability("Super Speed", 300)
+    ability2 = Ability("Super Eyes", 130)
+    ability3 = Ability("Wizard Wand", 80)
+    ability4 = Ability("Wizard Beard", 20)
+    hero1.add_ability(ability1)
+    hero1.add_ability(ability2)
+    hero2.add_ability(ability3)
+    hero2.add_ability(ability4)
+    hero1.fight(hero2)
