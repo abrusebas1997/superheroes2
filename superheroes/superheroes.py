@@ -150,7 +150,23 @@ class Arena:
     def create_armor(self):
         armor_name = input("Enter a Armor name: ")
         armor_block = input("Enter the Armor Power: ")
-        return Armor(armor_name, int(armor_block))
+        return Armor(armor_name, int(armor_block))]
+
+    def create_hero(self):
+        name_of_hero = input("Enter a Hero name: ")
+        new_hero = Hero(name_of_hero, starting_health=100)
+        ability_question = input("Do you want to add an ability? Y or N:  ")
+        if ability_question == "Y" or ability_question == 'y':
+            new_hero.add_ability(self.create_ability())
+
+        weapon_question = input("Do you want a weapon? Y or N:  ")
+        if weapon_question == "Y" or weapon_question == 'y':
+            new_hero.add_weapon(self.create_weapon())
+
+        armor_question = input("Do you want armor? Y or N:  ")
+        if armor_question == "Y" or armor_question == 'y':
+            new_hero.add_armor(self.create_armor())
+        return new_hero
 
 
 
