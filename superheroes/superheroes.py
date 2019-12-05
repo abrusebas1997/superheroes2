@@ -97,6 +97,11 @@ class Team:
         self.name = name
         self.heroes = []
 
+    def remove_hero(self, name):
+        for hero in self.heroes:
+            if name == hero.name:
+                self.heroes.remove(hero)
+        return 0
 
 
 
