@@ -92,6 +92,11 @@ class Hero:
                 print("Draw!")
                 return False
 
+class Team:
+    def __init__(self, name):
+        self.name = name
+        self.heroes = []
+
 
 
 
