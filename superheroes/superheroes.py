@@ -114,7 +114,12 @@ class Team:
             first_team = random.choice(self.heroes_alive())
             second_team = random.choice(other_team.heroes_alive())
             first_team.fight(second_team)
-
+    def heroes_alive(self): #To include opponent and self in heroes list
+        heroes_alive = []
+        for hero in self.heroes:
+            if hero.is_alive():
+                heroes_alive.append(hero)
+            return heroes_alive
 
 
 
@@ -178,14 +183,19 @@ if __name__ == "__main__":
     # hero.take_damage(15000)
     # print(hero.is_alive())
 
-    hero1 = Hero("Wonder Woman")
-    hero2 = Hero("Dumbledore")
-    ability1 = Ability("Super Speed", 300)
-    ability2 = Ability("Super Eyes", 130)
-    ability3 = Ability("Wizard Wand", 80)
-    ability4 = Ability("Wizard Beard", 20)
-    hero1.add_ability(ability1)
-    hero1.add_ability(ability2)
-    hero2.add_ability(ability3)
-    hero2.add_ability(ability4)
-    hero1.fight(hero2)
+    # hero1 = Hero("Wonder Woman")
+    # hero2 = Hero("Dumbledore")
+    # ability1 = Ability("Super Speed", 300)
+    # ability2 = Ability("Super Eyes", 130)
+    # ability3 = Ability("Wizard Wand", 80)
+    # ability4 = Ability("Wizard Beard", 20)
+    # hero1.add_ability(ability1)
+    # hero1.add_ability(ability2)
+    # hero2.add_ability(ability3)
+    # hero2.add_ability(ability4)
+    # hero1.fight(hero2)
+
+    hero = Hero("Wonder Woman")
+    weapon = Weapon("Lasso of Truth", 90)
+    hero.add_weapon(weapon)
+    print(hero.attack())
