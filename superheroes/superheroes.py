@@ -19,6 +19,7 @@ class Armor:
         block = random.randint(0, self.max_block)
         return block
 
+
 class Weapon(Ability):
     def attack(self):
         weapon_attack = randint(self.attack_strength//2, self.attack_strength)
@@ -31,9 +32,19 @@ class Hero:
         self.name = name
         self.starting_health = starting_health
         self.current_health = starting_health
+        self.deaths = 0
+        self.kills = 0
+    def add_kills(self, num_kills):
+        self.kills += num_kills
+
+    def add_deaths(self, num_deaths):
+        self.deaths += num_deaths
 
     def add_ability(self, ability):
         self.abilities.append(ability)
+
+    def add_weapon(self, weapon):
+        self.abilities.append(weapon)
 
     def current_health(self):
         return self.current_health
@@ -142,10 +153,8 @@ if __name__ == "__main__":
     # hero.take_damage(50)
     # print(hero.current_health)
 
-
     # hero.take_damage(15000)
     # print(hero.is_alive())
-
 
     hero1 = Hero("Wonder Woman")
     hero2 = Hero("Dumbledore")
