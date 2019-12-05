@@ -114,6 +114,7 @@ class Team:
             first_team = random.choice(self.heroes_alive())
             second_team = random.choice(other_team.heroes_alive())
             first_team.fight(second_team)
+
     def heroes_alive(self): #To include opponent and self in heroes list
         heroes_alive = []
         for hero in self.heroes:
@@ -121,8 +122,15 @@ class Team:
                 heroes_alive.append(hero)
             return heroes_alive
 
+    def revive_heroes(self, health=100):
+        for hero in self.heroes:
+            hero.current_health = hero.starting_health
 
-
+    def stats(self):
+        for hero in self.heroes:
+            print("Hero name: " + hero.name)
+            print("Kills: " + str(hero.kills))
+            print("Deaths: {} \n".format(hero.deaths))
 
 
 
