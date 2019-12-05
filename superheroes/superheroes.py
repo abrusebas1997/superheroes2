@@ -132,8 +132,20 @@ class Team:
             print("Kills: " + str(hero.kills))
             print("Deaths: {} \n".format(hero.deaths))
 
+class Arena:
+    def __init__(self):
+        self.team_one = Team("Team One")
+        self.team_two = Team("Team Two")
 
+    def create_ability(self):
+        ability_name = input("Enter an Ability name: ")
+        ability_power = input("Enter the Ability Power: ")
+        return Ability(ability_name, int(ability_power))
 
+    def create_weapon(self):
+        weapon_name = input("Enter an Weapon name: ")
+        weapon_power = input("Enter the Weapon Power: ")
+        return Weapon(weapon_name, int(weapon_power))
 
 
 
