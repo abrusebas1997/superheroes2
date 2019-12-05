@@ -103,6 +103,18 @@ class Team:
                 self.heroes.remove(hero)
         return 0
 
+    def view_all_heroes(self):
+        for hero in self.heroes:
+            print('{}'.format(hero.name))
+    def add_hero(self, hero):
+        self.heroes.append(hero)
+
+    def attack(self, other_Team):
+        while len(self.heroes_alive()) > 0 and len(other_team.heroes_alive()) > 0:
+            first_team = random.choice(self.heroes_alive())
+            second_team = random.choice(other_team.heroes_alive())
+            first_team.fight(second_team)
+
 
 
 
